@@ -14,21 +14,23 @@ class UsersController extends Controller
     {
         $validRoles = ['user', 'editor', 'admin'];
         $role = '';
+        // Set current page
+        $currentPage = is_numeric($request->get('page', 1)) ? $request->get('page', 1) : 1;
 
         // Check if role provided and is valid
         if (($role = strtolower($request->get('role', ''))) && in_array($role, $validRoles)) {
-            $key = "{$role}_users";
+            $key = "{$role}_users_{$currentPage}";
         } else {
-            $key = 'users';
+            $key = "users_{$currentPage}";
         }
 
         // Fetch users as per role, if role not provided retrieve all users
-        $users = Cache::remember($key, 10, function () use ($role){
+        $users = Cache::remember($key, 100, function () use ($role){
             $query = User::query();
             if ($role) {
                 $query->where('role', $role);
             }
-            return $query->get();
+            return $query->paginate(20);
         });
 
         return response()->json(['status' => true, 'data' => $users]);
