@@ -9,10 +9,17 @@
 
 ## Follow below instrucution to setup server side code
 
-1. To install laravel dependencies run "composer install"
-2. To install and setup redis server on ubuntu run following commands:- 
-   a) sudo apt update
-   b) sudo apt install redis-server
-   c) sudo nano /etc/redis/redis.conf
-   d) find "supervised" and update its value to "systemd" from "no" (As we are using ubuntu)
-   e) sudo systemctl restart redis.service
+<ol>
+    <li>To install laravel dependencies run "composer install"</li>
+    <li>
+        To install and setup redis server on ubuntu run following commands:-
+        <br/>
+        <ul>
+            <li>sudo apt update</li>
+            <li>sudo apt install redis-server</li>
+            <li>sudo nano /etc/redis/redis.conf</li>
+            <li>find "supervised" and update its value to "systemd" from "no" (As we are using ubuntu)</li>
+            <li>sudo systemctl restart redis.service</li>
+        </ul>
+    </li>
+</ol>
